@@ -86,6 +86,7 @@
                                         <h4>Author List</h4>
                                     </center>
                             </div>
+
                         </div>
 
                        
@@ -97,8 +98,10 @@
                         </div>
 
                         <div class="row">
+                            
                             <div class="col">
-                                <asp:GridView class="table table-striped table-bordered" ID="GridView1" runat="server"></asp:GridView>
+                                <asp:GridView ID="gridview1" runat="server"></asp:GridView>
+                                
                             </div>
                         </div>
 

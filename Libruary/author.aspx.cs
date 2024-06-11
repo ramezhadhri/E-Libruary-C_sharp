@@ -6,6 +6,7 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace Libruary
 {
@@ -17,7 +18,39 @@ namespace Libruary
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    string query = "SELECT * FROM author_master_tb1 ";
 
+                    using (SqlCommand cmd1 = new SqlCommand(query, conn))
+                    {
+
+                        conn.Open();
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd1))
+                        {
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            gridview1.DataSource = dt;
+                            gridview1.DataBind();
+                        }
+                    }
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                // Handle SQL exceptions
+                Response.Write($"<script>alert('SQL Error: {sqlEx.Message}');</script>");
+
+            }
+            catch (Exception ex)
+            {
+                // Handle other exceptions
+                Response.Write($"<script>alert('Error: {ex.Message}');</script>");
+
+            }
         }
         //add button
         protected void Button2_Click(object sender, EventArgs e)
